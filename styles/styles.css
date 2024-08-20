@@ -324,3 +324,188 @@ h2 {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.trending {
+  grid-area: trending;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.trending-tile {
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.1);
+  flex-grow: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
+}
+
+/* Webkit browsers custom scrollbar */
+.trending-tile::-webkit-scrollbar {
+  width: 8px;
+}
+
+.trending-tile::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.trending-tile::-webkit-scrollbar-thumb {
+  background-color: hsla(0, 0%, 60%, 0.5);
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Hide scrollbar when not scrolling */
+.trending-tile:not(:hover)::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+/* For Firefox */
+.trending-tile {
+  scrollbar-width: thin;
+  scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
+}
+
+/* Transition for smooth appearance/disappearance */
+.trending-tile {
+  transition: scrollbar-color 0.5s ease;
+}
+
+.trending-tile:not(:hover) {
+  scrollbar-color: transparent transparent;
+}
+
+.trending-book {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid hsl(0, 0%, 80%);
+}
+
+.trending-book:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.trending-book h3 {
+  font-size: 0.9rem;
+  margin: 0 0 5px 0;
+  color: hsl(220, 16%, 30%);
+}
+
+.trending-book p {
+  font-size: 0.8rem;
+  margin: 0;
+  color: hsl(220, 16%, 50%);
+}
+
+.your-books {
+  grid-area: books;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.books-container {
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.1);
+  flex-grow: 1;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  align-content: start;
+  scrollbar-width: thin;
+  scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
+}
+
+/* Webkit browsers custom scrollbar */
+.books-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.books-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.books-container::-webkit-scrollbar-thumb {
+  background-color: hsla(0, 0%, 60%, 0.5);
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Hide scrollbar when not scrolling */
+.books-container:not(:hover)::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+/* For Firefox */
+.books-container {
+  scrollbar-width: thin;
+  scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
+}
+
+/* Transition for smooth appearance/disappearance */
+.books-container {
+  transition: scrollbar-color 0.5s ease;
+}
+
+.books-container:not(:hover) {
+  scrollbar-color: transparent transparent;
+}
+
+.book-tile {
+  background-color: hsl(0, 0%, 98%);
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px hsla(0, 0%, 0%, 0.1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.book-tile h3 {
+  font-size: 1rem;
+  margin: 0 0 10px 0;
+  color: hsl(220, 16%, 30%);
+}
+
+.book-tile p {
+  font-size: 0.8rem;
+  margin: 5px 0;
+  color: hsl(220, 16%, 50%);
+}
+
+.read-status {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 10px;
+  font-size: 0.8rem;
+}
+
+.read-status .material-icons {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.read-status {
+  color: hsl(120, 50%, 40%);
+}
+
+.read-status.want-to-read {
+  color: hsl(40, 100%, 45%);
+}
+
+.status-text {
+  font-weight: bold;
+}
