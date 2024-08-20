@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --sidebar-width: 250px;
+  --right-column-width: 250px;
+}
+
 body,
 html {
   height: 100%;
@@ -18,10 +23,12 @@ html {
     "nav header header"
     "nav main main"
     "nav main main";
-  grid-template-columns: 250px 1fr 1fr;
+  grid-template-columns: var(--sidebar-width) minmax(var(--right-column-width), 1fr) var(
+      --right-column-width
+    );
   grid-template-rows: 150px 1fr 1fr;
   height: 100vh;
-  background-color: hsl(0, 0%, 94%); /* Light gray */
+  background-color: hsl(0, 0%, 94%);
 }
 
 nav {
@@ -202,16 +209,12 @@ main {
   padding: 24px;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: 1fr 250px;
+  grid-template-columns: minmax(var(--right-column-width), 1fr) var(--right-column-width);
   grid-template-rows: 1fr 1fr;
   gap: 24px;
   grid-template-areas:
     "books announcements"
     "books trending";
-}
-
-.your-books {
-  grid-area: books;
 }
 
 .announcements {
@@ -408,6 +411,7 @@ h2 {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-width: var(--right-column-width);
 }
 
 .books-container {
@@ -424,7 +428,6 @@ h2 {
   scrollbar-width: thin;
   scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
 }
-
 /* Webkit browsers custom scrollbar */
 .books-container::-webkit-scrollbar {
   width: 8px;
