@@ -1,14 +1,35 @@
+/* SETUP */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* SETTINGS */
 :root {
+  /* Colors */
+  --color-white: hsl(0, 0%, 100%);
+  --color-black: hsl(0, 0%, 0%);
+  --color-blue: hsl(200, 80%, 50%);
+  --color-yellow: hsl(45, 100%, 50%);
+  --color-gray-light: hsl(220, 16%, 90%);
+  --color-gray-dark: hsl(220, 16%, 30%);
+  --color-gray-medium: hsl(220, 16%, 50%);
+  --color-green: hsl(120, 50%, 40%);
+  --color-orange: hsl(40, 100%, 45%);
+
+  /* Sizes */
   --sidebar-width: 250px;
   --right-column-width: 250px;
+  --header-height: 150px;
+
+  /* Fonts */
+  --font-size-small: 0.7rem;
+  --font-size-medium: 0.9rem;
+  --font-size-large: 1.2rem;
 }
 
+/* STRUCTURE */
 body,
 html {
   height: 100%;
@@ -26,29 +47,54 @@ html {
   grid-template-columns: var(--sidebar-width) minmax(var(--right-column-width), 1fr) var(
       --right-column-width
     );
-  grid-template-rows: 150px 1fr 1fr;
+  grid-template-rows: var(--header-height) 1fr 1fr;
   height: 100vh;
-  background-color: hsl(0, 0%, 94%);
+  background-color: var(--color-gray-light);
 }
 
 nav {
   grid-area: nav;
-  background-color: hsl(200, 80%, 50%); /* Vibrant blue */
-  color: hsl(0, 0%, 100%); /* White */
+  background-color: var(--color-blue);
+  color: var(--color-white);
   padding: 24px 16px;
   display: flex;
   flex-direction: column;
 }
 
+header {
+  grid-area: header;
+  background-color: var(--color-white);
+  box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.1);
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main {
+  grid-area: main;
+  background-color: var(--color-gray-light);
+  padding: 24px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: minmax(var(--right-column-width), 1fr) var(--right-column-width);
+  grid-template-rows: 1fr 1fr;
+  gap: 24px;
+  grid-template-areas:
+    "books announcements"
+    "books trending";
+}
+
+/* COMPONENTS */
 .company-name {
-  font-size: 24px;
+  font-size: var(--font-size-large);
   margin-bottom: 45px;
   cursor: pointer;
   transition: color 0.1s ease;
 }
 
 .company-name:hover {
-  color: hsl(45, 100%, 50%); /* Bright yellow on hover */
+  color: var(--color-yellow);
 }
 
 .nav-list {
@@ -71,35 +117,20 @@ nav {
 
 .nav-list li:hover,
 .nav-list li:hover .material-icons {
-  color: hsl(45, 100%, 50%); /* Bright yellow on hover */
+  color: var(--color-yellow);
 }
 
 .material-icons {
   margin-right: 10px;
   transition: color 0.1s ease;
+  font-size: 20px;
 }
 
-header {
-  grid-area: header;
-  background-color: hsl(0, 0%, 100%); /* White */
-  box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.1); /* Semi-transparent black */
-  padding: 12px 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
+.header-top,
 .header-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px; /* Add some space between search bar and user info */
 }
 
 .search-bar {
@@ -109,28 +140,22 @@ header {
   flex-grow: 1;
 }
 
-.search-bar .material-icons {
-  margin-right: 8px;
-}
-
 .search-bar input {
-  background-color: hsl(220, 16%, 90%);
+  background-color: var(--color-gray-light);
   border: none;
   border-radius: 15px;
   padding: 4px 12px;
-  font-size: 0.9rem;
+  font-size: var(--font-size-medium);
   width: 100%;
-  outline: none; /* Removes the focus outline */
+  outline: none;
 }
 
-/* Optional: Add a subtle hover effect to the input */
-.search-bar input:hover {
-  background-color: hsl(220, 16%, 85%);
-}
-
-/* Optional: Add a subtle focus effect to the input */
+.search-bar input:hover,
 .search-bar input:focus {
   background-color: hsl(220, 16%, 85%);
+}
+
+.search-bar input:focus {
   box-shadow: 0 0 0 2px hsla(200, 80%, 50%, 0.2);
 }
 
@@ -142,7 +167,7 @@ header {
 
 .profile-pic-small,
 .profile-pic-large {
-  background-color: hsl(45, 100%, 50%); /* Placeholder color */
+  background-color: var(--color-yellow);
   border-radius: 50%;
 }
 
@@ -157,7 +182,7 @@ header {
 }
 
 .user-name {
-  font-size: 0.9rem;
+  font-size: var(--font-size-medium);
   font-weight: bold;
 }
 
@@ -168,12 +193,12 @@ header {
 }
 
 .greeting-text .small-text {
-  font-size: 0.7rem;
+  font-size: var(--font-size-small);
   margin: 0;
 }
 
 .greeting-text .large-text {
-  font-size: 1rem;
+  font-size: var(--font-size-medium);
   font-weight: bold;
   margin: 2px 0 0;
 }
@@ -184,12 +209,12 @@ header {
 }
 
 .action-buttons button {
-  background-color: hsl(200, 80%, 50%);
-  color: hsl(0, 0%, 100%);
+  background-color: var(--color-blue);
+  color: var(--color-white);
   border: none;
   border-radius: 15px;
   padding: 8px 16px;
-  font-size: 0.8rem;
+  font-size: var(--font-size-small);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -198,270 +223,53 @@ header {
   background-color: hsl(200, 80%, 40%);
 }
 
-.material-icons {
-  font-size: 20px;
-}
-
-/* Adjust main content to account for header height */
-main {
-  grid-area: main;
-  background-color: hsl(220, 16%, 90%);
-  padding: 24px;
-  overflow-y: auto;
-  display: grid;
-  grid-template-columns: minmax(var(--right-column-width), 1fr) var(--right-column-width);
-  grid-template-rows: 1fr 1fr;
-  gap: 24px;
-  grid-template-areas:
-    "books announcements"
-    "books trending";
-}
-
-.announcements {
-  grid-area: announcements;
-}
-
-.trending {
-  grid-area: trending;
-}
-
+/* MODULES */
 .your-books,
 .announcements,
 .trending {
   background-color: transparent;
   padding: 0;
-  overflow-y: auto; /* Add scroll if content exceeds container height */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.your-books {
+  grid-area: books;
+  min-width: var(--right-column-width);
 }
 
 .announcements {
   grid-area: announcements;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden; /* Prevent scrolling on the entire section */
+}
+
+.trending {
+  grid-area: trending;
 }
 
 h2 {
   margin-top: 0;
   margin-bottom: 16px;
-  font-size: 1.2rem;
-  color: hsl(220, 16%, 30%);
+  font-size: var(--font-size-large);
+  color: var(--color-gray-dark);
 }
 
-.announcements-tile {
-  background-color: hsl(0, 0%, 100%);
+.books-container,
+.announcements-tile,
+.trending-tile {
+  background-color: var(--color-white);
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.1);
   flex-grow: 1;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
-}
-
-/* Webkit browsers custom scrollbar */
-.announcements-tile::-webkit-scrollbar {
-  width: 8px;
-}
-
-.announcements-tile::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.announcements-tile::-webkit-scrollbar-thumb {
-  background-color: hsla(0, 0%, 60%, 0.5);
-  border-radius: 20px;
-  border: 2px solid transparent;
-  background-clip: content-box;
-}
-
-/* Hide scrollbar when not scrolling */
-.announcements-tile:not(:hover)::-webkit-scrollbar-thumb {
-  background-color: transparent;
-}
-
-/* Remove arrow buttons at top and bottom */
-.announcements-tile::-webkit-scrollbar-button {
-  display: none;
-}
-
-/* For Firefox */
-.announcements-tile {
-  scrollbar-width: thin;
-  scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
-}
-
-/* Transition for smooth appearance/disappearance */
-.announcements-tile {
-  transition: scrollbar-color 0.5s ease;
-}
-
-.announcements-tile:not(:hover) {
-  scrollbar-color: transparent transparent;
-}
-
-.announcement {
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid hsl(0, 0%, 80%);
-}
-
-.announcement:last-child {
-  padding-bottom: 0;
-  margin-bottom: 0;
-  border-bottom: none;
-}
-
-.announcement h3 {
-  font-size: 0.9rem;
-  margin: 0 0 5px 0;
-  color: hsl(220, 16%, 30%);
-}
-
-.announcement p {
-  font-size: 0.8rem;
-  margin: 0;
-  color: hsl(220, 16%, 50%);
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.trending {
-  grid-area: trending;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.trending-tile {
-  background-color: hsl(0, 0%, 100%);
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.1);
-  flex-grow: 1;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
-}
-
-/* Webkit browsers custom scrollbar */
-.trending-tile::-webkit-scrollbar {
-  width: 8px;
-}
-
-.trending-tile::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.trending-tile::-webkit-scrollbar-thumb {
-  background-color: hsla(0, 0%, 60%, 0.5);
-  border-radius: 20px;
-  border: 2px solid transparent;
-  background-clip: content-box;
-}
-
-/* Hide scrollbar when not scrolling */
-.trending-tile:not(:hover)::-webkit-scrollbar-thumb {
-  background-color: transparent;
-}
-
-/* For Firefox */
-.trending-tile {
-  scrollbar-width: thin;
-  scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
-}
-
-/* Transition for smooth appearance/disappearance */
-.trending-tile {
-  transition: scrollbar-color 0.5s ease;
-}
-
-.trending-tile:not(:hover) {
-  scrollbar-color: transparent transparent;
-}
-
-.trending-book {
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid hsl(0, 0%, 80%);
-}
-
-.trending-book:last-child {
-  padding-bottom: 0;
-  margin-bottom: 0;
-  border-bottom: none;
-}
-
-.trending-book h3 {
-  font-size: 0.9rem;
-  margin: 0 0 5px 0;
-  color: hsl(220, 16%, 30%);
-}
-
-.trending-book p {
-  font-size: 0.8rem;
-  margin: 0;
-  color: hsl(220, 16%, 50%);
-}
-
-.your-books {
-  grid-area: books;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  min-width: var(--right-column-width);
 }
 
 .books-container {
-  background-color: hsl(0, 0%, 100%);
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.1);
-  flex-grow: 1;
-  overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   align-content: start;
-  scrollbar-width: thin;
-  scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
-}
-/* Webkit browsers custom scrollbar */
-.books-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.books-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.books-container::-webkit-scrollbar-thumb {
-  background-color: hsla(0, 0%, 60%, 0.5);
-  border-radius: 20px;
-  border: 2px solid transparent;
-  background-clip: content-box;
-}
-
-/* Hide scrollbar when not scrolling */
-.books-container:not(:hover)::-webkit-scrollbar-thumb {
-  background-color: transparent;
-}
-
-/* For Firefox */
-.books-container {
-  scrollbar-width: thin;
-  scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
-}
-
-/* Transition for smooth appearance/disappearance */
-.books-container {
-  transition: scrollbar-color 0.5s ease;
-}
-
-.books-container:not(:hover) {
-  scrollbar-color: transparent transparent;
 }
 
 .book-tile {
@@ -476,15 +284,15 @@ h2 {
 }
 
 .book-tile h3 {
-  font-size: 1rem;
+  font-size: var(--font-size-medium);
   margin: 0 0 10px 0;
-  color: hsl(220, 16%, 30%);
+  color: var(--color-gray-dark);
 }
 
 .book-tile p {
-  font-size: 0.8rem;
+  font-size: var(--font-size-small);
   margin: 5px 0;
-  color: hsl(220, 16%, 50%);
+  color: var(--color-gray-medium);
 }
 
 .read-status {
@@ -493,22 +301,97 @@ h2 {
   align-items: center;
   justify-content: flex-end;
   padding-top: 10px;
-  font-size: 0.8rem;
-}
-
-.read-status .material-icons {
-  font-size: 18px;
-  margin-right: 5px;
-}
-
-.read-status {
-  color: hsl(120, 50%, 40%);
+  font-size: var(--font-size-small);
+  color: var(--color-green);
 }
 
 .read-status.want-to-read {
-  color: hsl(40, 100%, 45%);
+  color: var(--color-orange);
 }
 
 .status-text {
   font-weight: bold;
+}
+
+.announcement,
+.trending-book {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid hsl(0, 0%, 80%);
+}
+
+.announcement:last-child,
+.trending-book:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.announcement h3,
+.trending-book h3 {
+  font-size: var(--font-size-medium);
+  margin: 0 0 5px 0;
+  color: var(--color-gray-dark);
+}
+
+.announcement p,
+.trending-book p {
+  font-size: var(--font-size-small);
+  margin: 0;
+  color: var(--color-gray-medium);
+  line-height: 1.4;
+}
+
+.announcement p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Custom scrollbar styles */
+.books-container,
+.announcements-tile,
+.trending-tile {
+  scrollbar-width: thin;
+  scrollbar-color: hsla(0, 0%, 60%, 0.5) transparent;
+}
+
+.books-container::-webkit-scrollbar,
+.announcements-tile::-webkit-scrollbar,
+.trending-tile::-webkit-scrollbar {
+  width: 8px;
+}
+
+.books-container::-webkit-scrollbar-track,
+.announcements-tile::-webkit-scrollbar-track,
+.trending-tile::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.books-container::-webkit-scrollbar-thumb,
+.announcements-tile::-webkit-scrollbar-thumb,
+.trending-tile::-webkit-scrollbar-thumb {
+  background-color: hsla(0, 0%, 60%, 0.5);
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.books-container:not(:hover)::-webkit-scrollbar-thumb,
+.announcements-tile:not(:hover)::-webkit-scrollbar-thumb,
+.trending-tile:not(:hover)::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.books-container,
+.announcements-tile,
+.trending-tile {
+  transition: scrollbar-color 0.5s ease;
+}
+
+.books-container:not(:hover),
+.announcements-tile:not(:hover),
+.trending-tile:not(:hover) {
+  scrollbar-color: transparent transparent;
 }
